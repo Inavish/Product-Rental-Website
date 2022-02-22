@@ -1,0 +1,2 @@
+# Product-Rental-Website
+Product rental website ->Website to rent clothes online. In this customer will see all the clothes that are available and can order for rent by entering duration and all the details and validation will be performed for that he will receive otp to his email id and after successful validation, receipt will be sent to his email. ->Also admin panel will be there where admin can add all the clothes which is to be rented and also admin can see all the user who has order the clothes for rent.
