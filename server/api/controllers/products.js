@@ -1,5 +1,12 @@
 const Product = require("../models/products.js");
 const mongoose = require("mongoose");
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: "dcwbupnek",
+  api_key: "482132343232253",
+  api_secret: "5HOzfjxGplACwekT8svm-IwSrCs",
+});
 
 const create_product = (req, res, next) => {
   Product.find({
@@ -15,24 +22,36 @@ const create_product = (req, res, next) => {
           message: "product already exist",
         });
       } else {
-        const product = new Product({
-          _id: new mongoose.Types.ObjectId(),
-          ProductModel: req.body.ProductModel,
-          productName: req.body.productName,
-          ProductCategory: req.body.ProductCategory,
-          ProductColor: req.body.ProductColor,
-          ProductPrice: req.body.ProductPrice,
-          ProductImage: req.body.ProductImage,
-        });
-        product.save().then((result) => {
-          //capturing the success result
-          console.log("This is the result from saving");
-          console.log(result);
-          //constructing successful response
-          res.status(201).json({
-            message: "Product Added",
-            product: result,
-          });
+        const file = req.files.ProductImage;
+        cloudinary.uploader.upload(file.tempFilePath, (err, imageResult) => {
+          console.log(imageResult);
+          console.log("checking here");
+          if (imageResult) {
+            const product = new Product({
+              _id: new mongoose.Types.ObjectId(),
+              ProductModel: req.body.ProductModel,
+              productName: req.body.ProductName,
+              ProductCategory: req.body.ProductCategory,
+              ProductColor: req.body.ProductColor,
+              ProductPrice: req.body.ProductPrice,
+              ProductImage: imageResult.url,
+            });
+            product.save().then((result) => {
+              //capturing the success result
+              console.log("This is the result from saving");
+              console.log(result);
+              //constructing successful response
+              res.status(201).json({
+                message: "Product Added",
+                product: result,
+              });
+            });
+          }
+          if (err) {
+            return res.status(401).json({
+              message: "Not able to save data in database",
+            });
+          }
         });
       }
     })
