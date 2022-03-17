@@ -23,6 +23,7 @@ const create_product = (req, res, next) => {
         });
       } else {
         const file = req.files.ProductImage;
+        console.log(file);
         cloudinary.uploader.upload(file.tempFilePath, (err, imageResult) => {
           console.log(imageResult);
           console.log("checking here");
@@ -30,7 +31,7 @@ const create_product = (req, res, next) => {
             const product = new Product({
               _id: new mongoose.Types.ObjectId(),
               ProductModel: req.body.ProductModel,
-              productName: req.body.ProductName,
+              ProductName: req.body.ProductName,
               ProductCategory: req.body.ProductCategory,
               ProductColor: req.body.ProductColor,
               ProductPrice: req.body.ProductPrice,
@@ -76,7 +77,20 @@ const get_all_products = (req, res, next) => {
     })
     .catch((err) => console.log(err));
 };
+const getProductById = (req, res, next) => {
+  Product.find({ _id: new mongoose.Types.ObjectId(req.params.id) })
+    .exec()
+    .then((product) => {
+      console.log(product);
+      res.status(200).json({
+        message: "Got the user successfully",
+        product,
+      });
+    })
+    .catch((err) => console.log(err));
+};
 module.exports = {
   create_product,
   get_all_products,
+  getProductById,
 };
