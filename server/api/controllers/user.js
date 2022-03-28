@@ -186,6 +186,19 @@ const delete_user = (req, res, next) => {
     })
     .catch((err) => console.log(err));
 };
+const userLogout = (req, res, next) => {
+  if (req.session) {
+    // delete session object
+    req.session.destroy(function (err) {
+      if (err) {
+        return next(err);
+      } else {
+        console.log("checking here");
+        return true;
+      }
+    });
+  }
+};
 
 module.exports = {
   user_signup,
@@ -194,4 +207,5 @@ module.exports = {
   delete_user,
   getUserById,
   updateProductById,
+  userLogout,
 };

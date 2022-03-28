@@ -118,26 +118,40 @@ export default {
     onFileChanged(event) {
       this.ProductImage = event.target.files[0];
     },
-    addProduct() {
-      const productData = new FormData();
-      productData.append("ProductImage", this.ProductImage);
-      console.log(this.ProductImage);
-      productData.append("ProductModel", this.ProductModel);
-      productData.append("ProductName", this.ProductName);
-      productData.append("ProductPrice", this.ProductPrice);
-      productData.append("ProductColor", this.ProductColor);
-      productData.append("ProductCategory", this.ProductCategory);
-      console.log("check shivani");
-      console.log(productData);
-      axios.post("http://localhost:5000/products", productData).then((res) => {
-        console.log(res);
-        (this.ProductModel = ""),
-          (this.ProductName = ""),
-          (this.ProductCategory = ""),
-          (this.ProductPrice = ""),
-          (this.ProductImage = null),
-          (this.ProductColor = "");
-      });
+    async addProduct() {
+      if (
+        this.ProductImage &&
+        this.ProductModel &&
+        this.ProductName &&
+        this.ProductPrice &&
+        this.ProductColor &&
+        this.ProductCategory
+      ) {
+        const productData = new FormData();
+        productData.append("ProductImage", this.ProductImage);
+        console.log(this.ProductImage);
+        productData.append("ProductModel", this.ProductModel);
+        productData.append("ProductName", this.ProductName);
+        productData.append("ProductPrice", this.ProductPrice);
+        productData.append("ProductColor", this.ProductColor);
+        productData.append("ProductCategory", this.ProductCategory);
+        console.log("check shivani");
+        console.log(productData);
+        await axios
+          .post("http://localhost:5000/products", productData)
+          .then((res) => {
+            console.log(res);
+            (this.ProductModel = ""),
+              (this.ProductName = ""),
+              (this.ProductCategory = ""),
+              (this.ProductPrice = ""),
+              (this.ProductImage = null),
+              (this.ProductColor = "");
+          });
+        alert("Product Added successfully");
+      } else {
+        alert("All fields are required*");
+      }
     },
   },
 };

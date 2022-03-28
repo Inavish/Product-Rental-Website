@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <router-view />
   </div>
 </template>
@@ -10,4 +10,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.container {
+  background-image: url("../src/assets/circle-image.jpeg");
+}
+</style>

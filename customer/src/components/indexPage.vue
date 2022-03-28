@@ -10,6 +10,7 @@
 import navbar from "./navbar.vue";
 import carousel from "./carousel.vue";
 import productList from "./productsList.vue";
+
 export default {
   name: "indexPage",
   props: {},

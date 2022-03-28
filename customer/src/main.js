@@ -5,6 +5,7 @@ import App from "./App.vue";
 
 import indexPage from "./components/indexPage.vue";
 import selectedProduct from "./components/selectedProduct.vue";
+import confirmOrder from "./components/confirmOrder.vue";
 const routes = [
   {
     name: "indexPage",
@@ -14,8 +15,13 @@ const routes = [
 
   {
     name: "selectedProduct",
-    path: "/selectedProduct/:name",
+    path: "/selectedProduct/:id",
     component: selectedProduct,
+  },
+  {
+    name: "confirmOrder",
+    path: "/confirmOrder",
+    component: confirmOrder,
   },
 ];
 const router = VueRouter.createRouter({

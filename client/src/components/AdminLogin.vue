@@ -76,7 +76,7 @@ input[type="password"] {
 }
 
 button {
-  background-color: #04aa6d;
+  background-color: #020202;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -91,23 +91,29 @@ button:hover {
 
 .imgcontainer {
   text-align: center;
-  padding-left: 40%;
+  padding-left: 35%;
   margin: 24px 0 12px 0;
   width: 30%;
 }
 
 img.avatar {
-  width: 40%;
+  width: 100px;
   border-radius: 50%;
 }
 
 .container {
-  padding: 16px;
+  padding: 20px;
 }
 
 span.psw {
   float: right;
-  padding-top: 16px;
+}
+.hello {
+  width: 400px;
+  margin: 0 auto;
+  background: #ccc;
+  padding: 10px;
+  margin-top: 50px;
 }
 
 /* Change styles for span and cancel button on extra small screens */

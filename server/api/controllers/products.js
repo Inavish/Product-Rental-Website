@@ -83,14 +83,67 @@ const getProductById = (req, res, next) => {
     .then((product) => {
       console.log(product);
       res.status(200).json({
-        message: "Got the user successfully",
+        message: "Got the product successfully",
         product,
       });
     })
     .catch((err) => console.log(err));
 };
+const delete_product = (req, res, next) => {
+  Product.find({ _id: new mongoose.Types.ObjectId(req.params.id) })
+    .exec()
+    .then((product) => {
+      console.log("This is the product");
+      console.log(product);
+      //if order is not found that means user does not exists
+      if (product.length <= 0) {
+        return res.status(409).json({
+          message: "product does not exist",
+        });
+      } else {
+        //product is found in the database, and we will delete use
+        Product.deleteOne({
+          _id: new mongoose.Types.ObjectId(req.params.id),
+        }).then((result) => {
+          //capturing the success result
+          console.log("order deleted successfully");
+          console.log(result);
+          //constructing successful response
+          res.status(200).json({
+            message: "order deleted",
+            product: result,
+          });
+        });
+      }
+    })
+    .catch((err) => console.log(err));
+};
+const updateProductById = (req, res, next) => {
+  const updateOps = {};
+  for (const [key, value] of Object.entries(req.body)) {
+    updateOps[key] = value;
+  }
+  console.log("check shivani");
+  console.log(updateOps);
+  const { id } = req.params;
+  Product.updateOne({ _id: id }, { $set: updateOps })
+    .exec()
+    .then((successResult) => {
+      res.status(200).json({
+        message: "Product Updated",
+      });
+    })
+    .catch((err) => {
+      res.status(580).json({
+        message: "There has been an error",
+        error: err,
+      });
+    });
+};
 module.exports = {
   create_product,
   get_all_products,
   getProductById,
+  delete_product,
+  updateProductById,
 };

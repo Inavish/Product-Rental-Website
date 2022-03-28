@@ -8,6 +8,7 @@ const {
   delete_user,
   getUserById,
   updateProductById,
+  userLogout,
 } = require("../controllers/user.js");
 // const user = require("../controllers/user.js");
 // create user
@@ -23,4 +24,5 @@ router.delete("/:id", authCheck, delete_user);
 //update single user
 router.put("/update/:id", authCheck, updateProductById);
 //
+router.get("/logout", userLogout);
 module.exports = router;
