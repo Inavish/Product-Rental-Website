@@ -34,11 +34,4 @@ app.use("/products", productsRouter);
 app.use("/verification", verificationRouter);
 app.use("/order", orderRouter);
 
-// Handle production
-if (process.env.NODE_ENV == "production") {
-  //static folder
-  app.use(express.static(__dirname + "/public"));
-  // handle SPA
-  app.get(/.*/, (req, res) => res.sendFile(__dirname + "../public/index.html"));
-}
 module.exports = app;

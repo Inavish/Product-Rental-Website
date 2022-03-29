@@ -114,7 +114,7 @@ export default {
   methods: {
     async get_all_products() {
       try {
-        const response = await axios.get(`url/products`);
+        const response = await axios.get(`http://localhost:5000/products`);
         console.log(response);
         this.products = response.data.products;
       } catch (err) {
