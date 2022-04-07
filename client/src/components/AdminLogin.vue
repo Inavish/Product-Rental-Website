@@ -42,7 +42,7 @@ export default {
     async user_login() {
       try {
         await axios
-          .post(`http://localhost:5000/users/login`, {
+          .post(`${process.env.VUE_APP_ROOT_API}/users/login`, {
             email: this.email,
             password: this.password,
           })

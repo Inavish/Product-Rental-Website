@@ -40,9 +40,11 @@ export default {
     logoutUser() {
       try {
         console.log("Checking");
-        axios.get(`http://localhost:5000/users/logout`).then((res) => {
-          console.log(res);
-        });
+        axios
+          .get(`${process.env.VUE_APP_ROOT_API}/users/logout`)
+          .then((res) => {
+            console.log(res);
+          });
 
         this.$router.push(`/`);
       } catch (err) {

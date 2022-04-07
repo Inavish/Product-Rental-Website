@@ -97,7 +97,9 @@ export default {
     },
     async get_all_orders() {
       try {
-        const response = await axios.get(`http://localhost:5000/order`);
+        const response = await axios.get(
+          `${process.env.VUE_APP_ROOT_API}/order`
+        );
         console.log(response.data.order);
         this.orders = response.data.order;
       } catch (err) {
@@ -108,7 +110,7 @@ export default {
       let text = "Are you sure to delete this order?";
       if (confirm(text) == true) {
         try {
-          await axios.delete(`http://localhost:5000/order/${orderId}`);
+          await axios.delete(`${process.env.VUE_APP_ROOT_API}/${orderId}`);
           this.get_all_orders();
         } catch (err) {
           console.log(err);

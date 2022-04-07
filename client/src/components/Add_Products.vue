@@ -138,7 +138,7 @@ export default {
         console.log("check shivani");
         console.log(productData);
         await axios
-          .post("http://localhost:5000/products", productData)
+          .post(`${process.env.VUE_APP_ROOT_API}/products`, productData)
           .then((res) => {
             console.log(res);
             (this.ProductModel = ""),

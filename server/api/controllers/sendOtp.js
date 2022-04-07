@@ -9,8 +9,8 @@ let transporter = nodemailer.createTransport({
   secure: true,
   service: "Gmail",
   auth: {
-    user: "shivani151020@gmail.com",
-    pass: "SShivani#1510",
+    user: "your email",
+    pass: "password",
   },
 });
 const sendOtp = (req, res, next) => {

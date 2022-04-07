@@ -61,7 +61,7 @@ export default {
       console.log(this.userInfo);
       try {
         const response = await axios.get(
-          `http://localhost:5000/products/${this.userInfo.productId}`
+          `${process.env.VUE_APP_ROOT_API}/products/${this.userInfo.productId}`
         );
         console.log(response.data);
         this.productInfo = response.data.product[0];
@@ -78,7 +78,7 @@ export default {
       };
       axios
         .post(
-          "http://localhost:5000/verification/verifyOtp",
+          `${process.env.VUE_APP_ROOT_API}/verification/verifyOtp`,
           this.otpVerification
         )
         .then((res) => {
@@ -98,14 +98,14 @@ export default {
             };
             console.log(this.orderInfo);
             axios
-              .post("http://localhost:5000/order", this.orderInfo)
+              .post(`${process.env.VUE_APP_ROOT_API}/order`, this.orderInfo)
               .then((res) => {
                 console.log(res.data);
                 alert(
                   "Your Oder was successful, Receipt has been sent to your email."
                 );
                 axios.post(
-                  "http://localhost:5000/verification/receipt",
+                  `${process.env.VUE_APP_ROOT_API}/verification/receipt`,
                   this.orderInfo
                 );
                 this.$router.push(`/`);

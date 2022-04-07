@@ -114,7 +114,10 @@ export default {
   methods: {
     async get_all_products() {
       try {
-        const response = await axios.get(`http://localhost:5000/products`);
+        console.log(process.env.VUE_APP_ROOT_API);
+        const response = await axios.get(
+          `${process.env.VUE_APP_ROOT_API}/products`
+        );
         console.log(response);
         this.products = response.data.products;
       } catch (err) {
@@ -124,7 +127,7 @@ export default {
     async updateProduct() {
       try {
         await axios.put(
-          `http://localhost:5000/products/update/${this.productId}`,
+          `${process.env.VUE_APP_ROOT_API}/products/update/${this.productId}`,
           {
             ProductName: this.productName,
             ProductCategory: this.productCategory,
@@ -157,7 +160,9 @@ export default {
       let text = "Are you sure to delete this product?";
       if (confirm(text) == true) {
         try {
-          await axios.delete(`http://localhost:5000/products/${productId}`);
+          await axios.delete(
+            `${process.env.VUE_APP_ROOT_API}/products/${productId}`
+          );
           this.get_all_products();
         } catch (err) {
           console.log(err);

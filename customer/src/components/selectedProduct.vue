@@ -100,7 +100,7 @@ export default {
     async getProductById() {
       try {
         const response = await axios.get(
-          `http://localhost:5000/products/${this.$route.params.id}`
+          `${process.env.VUE_APP_ROOT_API}/products/${this.$route.params.id}`
         );
         console.log(response.data);
         this.productInfo = response.data.product[0];
@@ -134,23 +134,28 @@ export default {
           this.orderData = {
             email: this.email,
           };
-          axios.post("http://localhost:5000/verification", this.orderData).then(
-            (this.order = {
-              firstName: this.firstName,
-              lastName: this.lastName,
-              email: this.email,
-              contact: this.contact,
-              address: this.address,
-              fromDate: this.fromDate,
-              toDate: this.toDate,
-              productId: this.productInfo._id,
-              diffDays: diffDays,
-            }),
-            this.$router.push({
-              name: "confirmOrder",
-              params: this.order,
-            })
-          );
+          axios
+            .post(
+              `${process.env.VUE_APP_ROOT_API}/verification`,
+              this.orderData
+            )
+            .then(
+              (this.order = {
+                firstName: this.firstName,
+                lastName: this.lastName,
+                email: this.email,
+                contact: this.contact,
+                address: this.address,
+                fromDate: this.fromDate,
+                toDate: this.toDate,
+                productId: this.productInfo._id,
+                diffDays: diffDays,
+              }),
+              this.$router.push({
+                name: "confirmOrder",
+                params: this.order,
+              })
+            );
         } else {
           this.$router.push(`/`);
         }
