@@ -24,5 +24,5 @@ router.delete("/:id", authCheck, delete_user);
 //update single user
 router.put("/update/:id", authCheck, updateProductById);
 //
-router.get("/logout", userLogout);
+router.get("/logout", authCheck, userLogout);
 module.exports = router;

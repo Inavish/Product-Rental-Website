@@ -20,6 +20,8 @@ const productsRouter = require("../api/routes/products.js");
 const verificationRouter = require("../api/routes/sendOtp.js");
 const orderRouter = require("../api/routes/order.js");
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 const bodyParser = require("body-parser");
 app.use(morgan("dev"));
 app.use(

@@ -98,7 +98,11 @@ export default {
     async get_all_orders() {
       try {
         const response = await axios.get(
-          `${process.env.VUE_APP_ROOT_API}/order`
+          `${process.env.VUE_APP_ROOT_API}/order`,
+          {
+            headers: { authorization: localStorage.getItem("token") },
+            //take the token from localStorage and put it on headers ('authorization is my own header')
+          }
         );
         console.log(response.data.order);
         this.orders = response.data.order;
@@ -110,7 +114,13 @@ export default {
       let text = "Are you sure to delete this order?";
       if (confirm(text) == true) {
         try {
-          await axios.delete(`${process.env.VUE_APP_ROOT_API}/${orderId}`);
+          await axios.delete(
+            `${process.env.VUE_APP_ROOT_API}/order/${orderId}`,
+            {
+              headers: { authorization: localStorage.getItem("token") },
+              //take the token from localStorage and put it on headers ('authorization is my own header')
+            }
+          );
           this.get_all_orders();
         } catch (err) {
           console.log(err);

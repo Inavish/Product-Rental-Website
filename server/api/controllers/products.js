@@ -16,7 +16,6 @@ const create_product = (req, res, next) => {
     .then((product) => {
       console.log("This is the product");
       console.log(product);
-
       if (product.length >= 1) {
         return res.status(409).json({
           message: "product already exist",

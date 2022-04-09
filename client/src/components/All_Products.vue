@@ -115,8 +115,13 @@ export default {
     async get_all_products() {
       try {
         console.log(process.env.VUE_APP_ROOT_API);
+        console.log(localStorage.getItem("token"));
         const response = await axios.get(
-          `${process.env.VUE_APP_ROOT_API}/products`
+          `${process.env.VUE_APP_ROOT_API}/products`,
+          {
+            headers: { authorization: localStorage.getItem("token") },
+            //take the token from localStorage and put it on headers ('authorization is my own header')
+          }
         );
         console.log(response);
         this.products = response.data.products;
@@ -133,6 +138,9 @@ export default {
             ProductCategory: this.productCategory,
             ProductPrice: this.productPrice,
             ProductColor: this.productColor,
+          },
+          {
+            headers: { authorization: localStorage.getItem("token") },
           }
         );
 
@@ -161,7 +169,11 @@ export default {
       if (confirm(text) == true) {
         try {
           await axios.delete(
-            `${process.env.VUE_APP_ROOT_API}/products/${productId}`
+            `${process.env.VUE_APP_ROOT_API}/products/${productId}`,
+            {
+              headers: { authorization: localStorage.getItem("token") },
+              //take the token from localStorage and put it on headers ('authorization is my own header')
+            }
           );
           this.get_all_products();
         } catch (err) {

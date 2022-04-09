@@ -91,10 +91,15 @@ const user_login = (req, res, next) => {
               expiresIn: "1h",
             }
           );
+
           console.log(token);
           return res.status(200).json({
             message: "Authentication successful",
             token,
+          });
+        } else if (!result) {
+          return res.status(401).json({
+            message: "Invalid password",
           });
         }
       });
@@ -189,13 +194,9 @@ const delete_user = (req, res, next) => {
 const userLogout = (req, res, next) => {
   if (req.session) {
     // delete session object
-    req.session.destroy(function (err) {
-      if (err) {
-        return next(err);
-      } else {
-        console.log("checking here");
-        return true;
-      }
+    localStorage.clear();
+    res.status(200).json({
+      status: "Bye!",
     });
   }
 };

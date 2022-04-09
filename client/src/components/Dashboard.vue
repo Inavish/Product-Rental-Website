@@ -40,8 +40,11 @@ export default {
     logoutUser() {
       try {
         console.log("Checking");
+        localStorage.clear();
         axios
-          .get(`${process.env.VUE_APP_ROOT_API}/users/logout`)
+          .get(`${process.env.VUE_APP_ROOT_API}/users/logout`, {
+            headers: { authorization: localStorage.getItem("token") },
+          })
           .then((res) => {
             console.log(res);
           });

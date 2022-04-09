@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const authCheck = require("../middleware/authCheck.js");
 const {
   create_product,
   get_all_products,
@@ -7,9 +8,9 @@ const {
   delete_product,
   updateProductById,
 } = require("../controllers/products.js");
-router.post("/", create_product);
-router.get("/", get_all_products);
-router.get("/:id", getProductById);
-router.delete("/:id", delete_product);
-router.put("/update/:id", updateProductById);
+router.post("/", authCheck, create_product);
+router.get("/", authCheck, get_all_products);
+router.get("/:id", authCheck, getProductById);
+router.delete("/:id", authCheck, delete_product);
+router.put("/update/:id", authCheck, updateProductById);
 module.exports = router;

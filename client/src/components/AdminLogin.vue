@@ -40,19 +40,20 @@ export default {
   },
   methods: {
     async user_login() {
-      try {
-        await axios
-          .post(`${process.env.VUE_APP_ROOT_API}/users/login`, {
-            email: this.email,
-            password: this.password,
-          })
-          .then((response) => {
-            console.log(response);
-            this.$router.push(`/allProducts`);
-          });
-      } catch (err) {
-        console.log(err);
-      }
+      await axios
+        .post(`${process.env.VUE_APP_ROOT_API}/users/login`, {
+          email: this.email,
+          password: this.password,
+        })
+        .then((response) => {
+          console.log(response);
+          localStorage.setItem("token", response.data.token);
+          this.$router.push(`/allProducts`);
+        })
+        .catch((error) => {
+          alert("Wrong credential");
+          console.log(error);
+        });
     },
   },
 };
