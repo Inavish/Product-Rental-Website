@@ -138,7 +138,9 @@ export default {
         console.log("check shivani");
         console.log(productData);
         await axios
-          .post(`${process.env.VUE_APP_ROOT_API}/products`, productData)
+          .post(`${process.env.VUE_APP_ROOT_API}/products`, productData, {
+            headers: { authorization: localStorage.getItem("token") },
+          })
           .then((res) => {
             console.log(res);
             (this.ProductModel = ""),

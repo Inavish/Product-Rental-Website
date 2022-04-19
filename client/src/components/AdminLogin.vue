@@ -21,10 +21,6 @@
 
       <button @click="user_login()" type="submit">Login</button>
     </div>
-
-    <div class="container" style="background-color: #f1f1f1">
-      <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
   </div>
 </template>
 

@@ -8,7 +8,7 @@
           alt="logo"
       /></a>
       <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a>Example</a>
       <div class="search-container">
         <input type="text" placeholder="Search.." name="search" />
         <button type="submit"><i class="fa fa-search">Search</i></button>
@@ -21,6 +21,7 @@
 export default {
   name: "navBarPage",
   props: {},
+  methods: {},
 };
 </script>
 

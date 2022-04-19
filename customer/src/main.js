@@ -6,6 +6,7 @@ import App from "./App.vue";
 import indexPage from "./components/indexPage.vue";
 import selectedProduct from "./components/selectedProduct.vue";
 import confirmOrder from "./components/confirmOrder.vue";
+import chatbotPage from "./components/chatbotPage.vue";
 const routes = [
   {
     name: "indexPage",
@@ -22,6 +23,11 @@ const routes = [
     name: "confirmOrder",
     path: "/confirmOrder",
     component: confirmOrder,
+  },
+  {
+    name: "chatbot",
+    path: "/chatbot",
+    component: chatbotPage,
   },
 ];
 const router = VueRouter.createRouter({

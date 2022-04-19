@@ -38,20 +38,21 @@ export default {
   name: "DashboardPage",
   methods: {
     logoutUser() {
-      try {
-        console.log("Checking");
-        localStorage.clear();
-        axios
-          .get(`${process.env.VUE_APP_ROOT_API}/users/logout`, {
-            headers: { authorization: localStorage.getItem("token") },
-          })
-          .then((res) => {
-            console.log(res);
-          });
-
-        this.$router.push(`/`);
-      } catch (err) {
-        console.log(err);
+      if (confirm("Sure to logout?")) {
+        try {
+          console.log("Checking");
+          localStorage.clear();
+          axios
+            .get(`${process.env.VUE_APP_ROOT_API}/users/logout`, {
+              headers: { authorization: localStorage.getItem("token") },
+            })
+            .then((res) => {
+              console.log(res);
+            });
+          this.$router.push(`/`);
+        } catch (err) {
+          console.log(err);
+        }
       }
     },
   },

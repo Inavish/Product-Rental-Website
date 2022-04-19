@@ -9,8 +9,8 @@ const {
   updateProductById,
 } = require("../controllers/products.js");
 router.post("/", authCheck, create_product);
-router.get("/", authCheck, get_all_products);
-router.get("/:id", authCheck, getProductById);
+router.get("/", get_all_products);
+router.get("/:id", getProductById);
 router.delete("/:id", authCheck, delete_product);
 router.put("/update/:id", authCheck, updateProductById);
 module.exports = router;
