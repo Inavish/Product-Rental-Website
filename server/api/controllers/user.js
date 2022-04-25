@@ -139,7 +139,7 @@ const getUserById = (req, res, next) => {
     .catch((err) => console.log(err));
 };
 // Update user
-const updateProductById = (req, res, next) => {
+const updateUserById = (req, res, next) => {
   const updateOps = {};
   for (const [key, value] of Object.entries(req.body)) {
     updateOps[key] = value;
@@ -207,6 +207,6 @@ module.exports = {
   get_all_users,
   delete_user,
   getUserById,
-  updateProductById,
+  updateUserById,
   userLogout,
 };

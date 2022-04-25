@@ -7,7 +7,7 @@ const {
   get_all_users,
   delete_user,
   getUserById,
-  updateProductById,
+  updateUserById,
   userLogout,
 } = require("../controllers/user.js");
 // const user = require("../controllers/user.js");
@@ -22,7 +22,7 @@ router.get("/userInfo/:id", authCheck, getUserById);
 // delete single user
 router.delete("/:id", authCheck, delete_user);
 //update single user
-router.put("/update/:id", authCheck, updateProductById);
+router.put("/update/:id", authCheck, updateUserById);
 //
 router.get("/logout", authCheck, userLogout);
 module.exports = router;
